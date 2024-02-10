@@ -5,10 +5,10 @@ import (
 	"github.com/mathews-r/golang/src/configs/logger"
 )
 
-func GetUserById(c *gin.Context) {
+func (uc *userControllerInterface) GetUserById(c *gin.Context) {
 	logger.Info("Usuario")
 }
 
-func GetUserByEmail(c *gin.Context) {
+func (uc *userControllerInterface) GetUserByEmail(c *gin.Context) {
 
 }
