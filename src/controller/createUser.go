@@ -8,6 +8,7 @@ import (
 	"github.com/mathews-r/golang/src/configs/validation"
 	"github.com/mathews-r/golang/src/controller/model/request"
 	"github.com/mathews-r/golang/src/model"
+	"github.com/mathews-r/golang/src/model/service"
 	"go.uber.org/zap"
 )
 
@@ -30,7 +31,9 @@ func CreateUser(c *gin.Context) {
 		userRequest.Age,
 	)
 
-	if err := domain.CreateUser(); err != nil {
+	service := service.NewUserDomainService()
+
+	if err := service.CreateUser(domain); err != nil {
 		c.JSON(err.Code, err)
 		return
 	}
