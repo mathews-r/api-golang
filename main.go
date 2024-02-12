@@ -1,24 +1,34 @@
 package main
 
 import (
+	"context"
 	"log"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	"github.com/mathews-r/golang/src/controller"
+	"github.com/mathews-r/golang/src/configs/database/mongodb"
+	"github.com/mathews-r/golang/src/configs/logger"
 	"github.com/mathews-r/golang/src/controller/routes"
-	"github.com/mathews-r/golang/src/model/service"
 )
 
 func main() {
-	err := godotenv.Load()
+	logger.Info("About to start user application")
+	godotenv.Load()
+
+	database, err := mongodb.NewMongoDBConnection(context.Background())
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Fatalf(
+			"Error trying to connect to database, error=%s \n",
+			err.Error())
+		return
 	}
 
-	service := service.NewUserDomainService()
-	userController := controller.NewUserControllerInterface(service)
+	// repo := repository.NewUserRepository(database)
+	// service := service.NewUserDomainService(repo)
+	// userController := controller.NewUserControllerInterface(service)
 
+	// userController := initDependencies(database)
+	userController := initDependencies(database)
 	router := gin.Default()
 
 	routes.InitRoutes(&router.RouterGroup, userController)
