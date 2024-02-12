@@ -12,3 +12,11 @@ func ConvertDomainToEntity(domain model.UserDomainInterface) *entity.UserEntity 
 		Password: domain.GetPassword(),
 	}
 }
+
+func ConvertDomainToEntityPost(domain model.PostDomainInterface) *entity.PostEntity {
+	return &entity.PostEntity{
+		Title:   domain.GetTitle(),
+		Content: domain.GetContent(),
+		UserId:  domain.GetUserId(),
+	}
+}

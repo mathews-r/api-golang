@@ -17,3 +17,15 @@ func ConvertEntityToDomain(entity entity.UserEntity) model.UserDomainInterface {
 
 	return domain
 }
+
+func ConvertEntityToDomainPost(entity entity.PostEntity) model.PostDomainInterface {
+	domain := model.NewPostDomain(
+		entity.Title,
+		entity.Content,
+		entity.UserId,
+	)
+
+	domain.SetId(entity.ID.Hex())
+
+	return domain
+}

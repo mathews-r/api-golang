@@ -15,3 +15,14 @@ func ConvertDomainToResponse(
 		Age:   userDomain.GetAge(),
 	}
 }
+
+func ConvertDomainToResponsePost(
+	postDomain model.PostDomainInterface,
+) response.PostResponse {
+	return response.PostResponse{
+		ID:      postDomain.GetPostId(),
+		Title:   postDomain.GetTitle(),
+		Content: postDomain.GetContent(),
+		UserId:  postDomain.GetUserId(),
+	}
+}

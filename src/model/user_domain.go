@@ -1,25 +1,11 @@
 package model
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type userDomain struct {
 	ID       string
 	Email    string
 	Password string
 	Name     string
 	Age      int
-}
-
-func (ud *userDomain) GetJSONValue() (string, error) {
-	jsonValues, err := json.Marshal(ud)
-	if err != nil {
-		fmt.Println(err)
-		return "", err
-	}
-	return string(jsonValues), nil
 }
 
 func (ud *userDomain) GetId() string {

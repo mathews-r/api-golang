@@ -1,5 +1,10 @@
 package model
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 type UserDomainInterface interface {
 	GetEmail() string
 	GetPassword() string
@@ -20,4 +25,13 @@ func NewUserDomain(
 		Name:     name,
 		Age:      age,
 	}
+}
+
+func (ud *userDomain) GetJSONValue() (string, error) {
+	jsonValues, err := json.Marshal(ud)
+	if err != nil {
+		fmt.Println(err)
+		return "", err
+	}
+	return string(jsonValues), nil
 }

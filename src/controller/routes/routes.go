@@ -5,7 +5,7 @@ import (
 	"github.com/mathews-r/golang/src/controller"
 )
 
-func InitRoutes(r *gin.RouterGroup, userController controller.UserControllerInterface) {
+func InitRoutes(r *gin.RouterGroup, userController controller.UserControllerInterface, postController controller.PostControllerInterface) {
 
 	//USER ROUTES
 	r.GET("/getUserById/:userId", userController.GetUserById)
@@ -21,9 +21,9 @@ func InitRoutes(r *gin.RouterGroup, userController controller.UserControllerInte
 
 	// POST ROUTES
 	// r.GET("/posts/search", tokenValidation, postController.GetPostByQuery)
-	// r.GET("/posts/", tokenValidation, postController.GetPosts)
-	// r.GET("/posts/:postId", tokenValidation, postController.GetPostById)
-	// r.POST("/posts/", tokenValidation, postController.NewPost)
+	// r.GET("/posts/", tokenValidation, post.GetPosts)
+	// r.GET("/posts/:postId", tokenValidation, postController)
+	r.POST("/posts/", postController.CreatePost)
 	// r.PUT("/posts/:postId", tokenValidation, postController.UpdatePost)
 	// r.DELETE("/posts/:postId", tokenValidation, postController.DeletePost)
 

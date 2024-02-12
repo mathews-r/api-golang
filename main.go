@@ -26,14 +26,18 @@ func main() {
 		return
 	}
 
-	repo := repository.NewUserRepository(database)
-	service := service.NewUserDomainService(repo)
-	userController := controller.NewUserControllerInterface(service)
+	userRepo := repository.NewUserRepository(database)
+	userService := service.NewUserDomainService(userRepo)
+	userController := controller.NewUserControllerInterface(userService)
+
+	postRepo := repository.NewPostRepository(database)
+	postService := service.NewPostDomainService(postRepo)
+	postController := controller.NewPostControllerInterface(postService)
 
 	// userController := initDependencies(database)
 	router := gin.Default()
 
-	routes.InitRoutes(&router.RouterGroup, userController)
+	routes.InitRoutes(&router.RouterGroup, userController, postController)
 	if err := router.Run(":8080"); err != nil {
 		log.Fatal(err)
 	}
