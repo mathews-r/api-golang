@@ -22,6 +22,10 @@ func (ud *userDomain) GetJSONValue() (string, error) {
 	return string(jsonValues), nil
 }
 
+func (ud *userDomain) GetId() string {
+	return ud.ID
+}
+
 func (ud *userDomain) SetId(id string) {
 	ud.ID = id
 }

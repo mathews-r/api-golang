@@ -7,9 +7,30 @@ import (
 
 func InitRoutes(r *gin.RouterGroup, userController controller.UserControllerInterface) {
 
+	//USER ROUTES
 	r.GET("/getUserById/:userId", userController.GetUserById)
+	// r.GET("/users", tokenValidation, userController.GetUsers)
+	// r.GET("/users/:userId", tokenValidation, userController.GetUserById)
+	// r.DELETE("/users/:userId", tokenValidation, userController.DeleteUser)
+	// r.POST("/users", userController.CreateUser)
+
 	r.GET("/getUserByEmail/:userEmail", userController.GetUserByEmail)
 	r.POST("/createUser", userController.CreateUser)
 	r.PUT("/updateUser/:userId", userController.UpdateUser)
 	r.DELETE("/deleteUser/:userId", userController.DeleteUser)
+
+	// POST ROUTES
+	// r.GET("/posts/search", tokenValidation, postController.GetPostByQuery)
+	// r.GET("/posts/", tokenValidation, postController.GetPosts)
+	// r.GET("/posts/:postId", tokenValidation, postController.GetPostById)
+	// r.POST("/posts/", tokenValidation, postController.NewPost)
+	// r.PUT("/posts/:postId", tokenValidation, postController.UpdatePost)
+	// r.DELETE("/posts/:postId", tokenValidation, postController.DeletePost)
+
+	// CATEGORY ROUTES
+	// r.GET("/categories/", tokenValidation, categoryController.GetCategories)
+	// r.POST("/categories/", tokenValidation, categoryController.NewCategory)
+
+	// AUTHY ROUTES
+	// R.POST("/auth", authController.Verify)
 }

@@ -8,6 +8,7 @@ import (
 	"github.com/mathews-r/golang/src/configs/rest_err"
 	"github.com/mathews-r/golang/src/model"
 	"github.com/mathews-r/golang/src/model/entity/converter"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 var (
@@ -28,6 +29,6 @@ func (ur *userRepository) CreateUser(userDomain model.UserDomainInterface) (mode
 		return nil, rest_err.NewInternalServerErr(err.Error())
 	}
 
-	userDomain.SetId(result.InsertedID.(string))
-	return userDomain, nil
+	value.ID = result.InsertedID.(primitive.ObjectID)
+	return converter.ConvertEntityToDomain(*value), nil
 }

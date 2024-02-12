@@ -8,7 +8,10 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/mathews-r/golang/src/configs/database/mongodb"
 	"github.com/mathews-r/golang/src/configs/logger"
+	"github.com/mathews-r/golang/src/controller"
+	"github.com/mathews-r/golang/src/controller/model/repository"
 	"github.com/mathews-r/golang/src/controller/routes"
+	"github.com/mathews-r/golang/src/model/service"
 )
 
 func main() {
@@ -23,12 +26,11 @@ func main() {
 		return
 	}
 
-	// repo := repository.NewUserRepository(database)
-	// service := service.NewUserDomainService(repo)
-	// userController := controller.NewUserControllerInterface(service)
+	repo := repository.NewUserRepository(database)
+	service := service.NewUserDomainService(repo)
+	userController := controller.NewUserControllerInterface(service)
 
 	// userController := initDependencies(database)
-	userController := initDependencies(database)
 	router := gin.Default()
 
 	routes.InitRoutes(&router.RouterGroup, userController)

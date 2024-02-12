@@ -7,6 +7,7 @@ type UserDomainInterface interface {
 	GetAge() int
 	EncryptPassword()
 	SetId(string)
+	GetId() string
 }
 
 func NewUserDomain(
