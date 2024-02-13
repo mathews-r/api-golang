@@ -1,9 +1,6 @@
 package model
 
-import (
-	"encoding/json"
-	"fmt"
-)
+import "github.com/mathews-r/golang/src/configs/rest_err"
 
 type UserDomainInterface interface {
 	GetEmail() string
@@ -13,6 +10,7 @@ type UserDomainInterface interface {
 	EncryptPassword()
 	SetId(string)
 	GetId() string
+	GenerateToken() (string, *rest_err.RestErr)
 }
 
 func NewUserDomain(
@@ -27,6 +25,15 @@ func NewUserDomain(
 	}
 }
 
+func LoginDomain(
+	email, password string,
+) UserDomainInterface {
+	return &userDomain{
+		Email:    email,
+		Password: password,
+	}
+}
+
 func UpdateUserDomain(
 	name string,
 	age int,
@@ -35,13 +42,4 @@ func UpdateUserDomain(
 		Name: name,
 		Age:  age,
 	}
-}
-
-func (ud *userDomain) GetJSONValue() (string, error) {
-	jsonValues, err := json.Marshal(ud)
-	if err != nil {
-		fmt.Println(err)
-		return "", err
-	}
-	return string(jsonValues), nil
 }
