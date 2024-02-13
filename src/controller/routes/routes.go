@@ -3,6 +3,7 @@ package routes
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/mathews-r/golang/src/controller"
+	"github.com/mathews-r/golang/src/model"
 )
 
 func InitRoutes(r *gin.RouterGroup, userController controller.UserControllerInterface, postController controller.PostControllerInterface) {
@@ -14,8 +15,8 @@ func InitRoutes(r *gin.RouterGroup, userController controller.UserControllerInte
 	// r.DELETE("/users/:userId", tokenValidation, userController.DeleteUser)
 	// r.POST("/users", userController.CreateUser)
 
-	r.GET("/getUserByEmail/:userEmail", userController.FindUserByEmail)
-	r.POST("/createUser", userController.CreateUser)
+	r.GET("/getUserByEmail/:userEmail", model.VerifyTokenMiddleware, userController.FindUserByEmail)
+	r.POST("/createUser", model.VerifyTokenMiddleware, userController.CreateUser)
 	r.POST("/login", userController.LoginUser)
 	r.PUT("/updateUser/:userId", userController.UpdateUser)
 	r.DELETE("/deleteUser/:userId", userController.DeleteUser)

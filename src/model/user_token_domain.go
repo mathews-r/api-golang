@@ -1,11 +1,14 @@
 package model
 
 import (
+	"fmt"
 	"os"
 	"strings"
 	"time"
 
+	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt"
+	"github.com/mathews-r/golang/src/configs/logger"
 	"github.com/mathews-r/golang/src/configs/rest_err"
 )
 
@@ -65,4 +68,38 @@ func RemoveBearerFromToken(token string) string {
 	}
 	// return token[7:]
 	return token
+}
+
+func VerifyTokenMiddleware(c *gin.Context) {
+	secret := os.Getenv(JWT_SECRET)
+	tokenValue := RemoveBearerFromToken(c.Request.Header.Get("Authorization"))
+
+	token, err := jwt.Parse(RemoveBearerFromToken(tokenValue), func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); ok {
+			return []byte(secret), nil
+		}
+		return nil, rest_err.NewBadRequestErr("Invalid token")
+	})
+
+	if err != nil {
+		errorRest := rest_err.NewUnauthorizedErr("Invalid token")
+		c.JSON(errorRest.Code, errorRest)
+		c.Abort()
+		return
+	}
+
+	claims, ok := token.Claims.(jwt.MapClaims)
+	if !ok || !token.Valid {
+		errorRest := rest_err.NewUnauthorizedErr("Invalid token")
+		c.JSON(errorRest.Code, errorRest)
+		c.Abort()
+		return
+	}
+
+	userDomain := userDomain{
+		ID:    claims["id"].(string),
+		Email: claims["email"].(string),
+		Name:  claims["name"].(string),
+	}
+	logger.Info(fmt.Sprintf("User authenticated: %#v", userDomain))
 }
