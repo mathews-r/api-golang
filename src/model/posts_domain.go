@@ -4,7 +4,7 @@ type postDomain struct {
 	ID        string
 	Title     string
 	Content   string
-	UserId    int
+	UserId    string
 	Published string
 	Updated   string
 }
@@ -21,7 +21,7 @@ func (pd *postDomain) GetContent() string {
 	return pd.Content
 }
 
-func (pd *postDomain) GetUserId() int {
+func (pd *postDomain) GetUserId() string {
 	return pd.UserId
 }
 

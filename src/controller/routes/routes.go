@@ -9,7 +9,7 @@ import (
 func InitRoutes(r *gin.RouterGroup, userController controller.UserControllerInterface, postController controller.PostControllerInterface) {
 
 	r.GET("/getUserByEmail/:userEmail", model.VerifyTokenMiddleware, userController.FindUserByEmail)
-	r.POST("/createUser", model.VerifyTokenMiddleware, userController.CreateUser)
+	r.POST("/createUser", userController.CreateUser)
 	r.POST("/login", userController.LoginUser)
 	r.PUT("/updateUser/:userId", userController.UpdateUser)
 	r.DELETE("/deleteUser/:userId", userController.DeleteUser)

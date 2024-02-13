@@ -10,14 +10,14 @@ type PostDomainInterface interface {
 	GetPostId() string
 	GetTitle() string
 	GetContent() string
-	GetUserId() int
+	GetUserId() string
 	SetId(string)
 	GetPublished() string
 	GetUpdated() string
 }
 
 func NewPostDomain(
-	title, content, published, updated string, userId int,
+	title, content, published, updated, userId string,
 ) PostDomainInterface {
 	return &postDomain{
 		Title:     title,

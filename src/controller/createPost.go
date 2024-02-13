@@ -25,13 +25,20 @@ func (pc *postControllerInterface) CreatePost(c *gin.Context) {
 	}
 
 	//FAZER UM GETBYID E PASSAR NO USERID
+	token := c.Request.Header.Get("Authorization")
+
+	user, err := model.VerifyToken(token)
+	if err != nil {
+		c.JSON(err.Code, err)
+		return
+	}
 
 	domain := model.NewPostDomain(
 		postRequest.Title,
 		postRequest.Content,
 		postRequest.Published,
 		postRequest.Updated,
-		postRequest.UserId,
+		user.GetId(),
 	)
 
 	domainResult, err := pc.service.CreatePost(domain)
