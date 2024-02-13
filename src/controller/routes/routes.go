@@ -8,13 +8,13 @@ import (
 func InitRoutes(r *gin.RouterGroup, userController controller.UserControllerInterface, postController controller.PostControllerInterface) {
 
 	//USER ROUTES
-	r.GET("/getUserById/:userId", userController.GetUserById)
+	// r.GET("/getUserById/:userId", userController.FindUserByEmailService)
 	// r.GET("/users", tokenValidation, userController.GetUsers)
 	// r.GET("/users/:userId", tokenValidation, userController.GetUserById)
 	// r.DELETE("/users/:userId", tokenValidation, userController.DeleteUser)
 	// r.POST("/users", userController.CreateUser)
 
-	r.GET("/getUserByEmail/:userEmail", userController.GetUserByEmail)
+	r.GET("/getUserByEmail/:userEmail", userController.FindUserByEmail)
 	r.POST("/createUser", userController.CreateUser)
 	r.PUT("/updateUser/:userId", userController.UpdateUser)
 	r.DELETE("/deleteUser/:userId", userController.DeleteUser)

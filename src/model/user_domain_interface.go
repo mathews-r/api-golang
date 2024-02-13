@@ -27,6 +27,16 @@ func NewUserDomain(
 	}
 }
 
+func UpdateUserDomain(
+	name string,
+	age int,
+) UserDomainInterface {
+	return &userDomain{
+		Name: name,
+		Age:  age,
+	}
+}
+
 func (ud *userDomain) GetJSONValue() (string, error) {
 	jsonValues, err := json.Marshal(ud)
 	if err != nil {

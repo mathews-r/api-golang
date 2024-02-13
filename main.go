@@ -9,8 +9,8 @@ import (
 	"github.com/mathews-r/golang/src/configs/database/mongodb"
 	"github.com/mathews-r/golang/src/configs/logger"
 	"github.com/mathews-r/golang/src/controller"
-	"github.com/mathews-r/golang/src/controller/model/repository"
 	"github.com/mathews-r/golang/src/controller/routes"
+	"github.com/mathews-r/golang/src/model/repository"
 	"github.com/mathews-r/golang/src/model/service"
 )
 

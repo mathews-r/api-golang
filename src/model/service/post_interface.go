@@ -2,8 +2,8 @@ package service
 
 import (
 	"github.com/mathews-r/golang/src/configs/rest_err"
-	"github.com/mathews-r/golang/src/controller/model/repository"
 	"github.com/mathews-r/golang/src/model"
+	"github.com/mathews-r/golang/src/model/repository"
 )
 
 func NewPostDomainService(postInterface repository.PostRepository) PostDomainService {

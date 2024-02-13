@@ -2,7 +2,7 @@ package converter
 
 import (
 	"github.com/mathews-r/golang/src/model"
-	"github.com/mathews-r/golang/src/model/entity"
+	"github.com/mathews-r/golang/src/model/repository/entity"
 )
 
 func ConvertEntityToDomain(entity entity.UserEntity) model.UserDomainInterface {

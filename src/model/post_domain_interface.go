@@ -21,8 +21,8 @@ func NewPostDomain(
 		Title:     title,
 		Content:   content,
 		UserId:    userId,
-		Published: time.Now(),
-		Updated:   time.Now(),
+		Published: time.Now().UTC(),
+		Updated:   time.Now().UTC(),
 	}
 }
 
