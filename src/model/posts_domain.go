@@ -1,16 +1,12 @@
 package model
 
-import (
-	"time"
-)
-
 type postDomain struct {
 	ID        string
 	Title     string
 	Content   string
 	UserId    int
-	Published time.Time
-	Updated   time.Time
+	Published string
+	Updated   string
 }
 
 func (pd *postDomain) SetId(id string) {
@@ -33,10 +29,10 @@ func (pd *postDomain) GetPostId() string {
 	return pd.ID
 }
 
-func (pd *postDomain) GetPublised() string {
-	return pd.Published.String()
+func (pd *postDomain) GetPublished() string {
+	return pd.Published
 }
 
-func (pd *postDomain) GetUpdate() string {
-	return pd.Updated.String()
+func (pd *postDomain) GetUpdated() string {
+	return pd.Updated
 }

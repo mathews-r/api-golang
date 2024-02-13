@@ -22,6 +22,8 @@ func ConvertEntityToDomainPost(entity entity.PostEntity) model.PostDomainInterfa
 	domain := model.NewPostDomain(
 		entity.Title,
 		entity.Content,
+		entity.Published,
+		entity.Updated,
 		entity.UserId,
 	)
 

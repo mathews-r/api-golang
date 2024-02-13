@@ -20,9 +20,11 @@ func ConvertDomainToResponsePost(
 	postDomain model.PostDomainInterface,
 ) response.PostResponse {
 	return response.PostResponse{
-		ID:      postDomain.GetPostId(),
-		Title:   postDomain.GetTitle(),
-		Content: postDomain.GetContent(),
-		UserId:  postDomain.GetUserId(),
+		ID:        postDomain.GetPostId(),
+		Title:     postDomain.GetTitle(),
+		Content:   postDomain.GetContent(),
+		UserId:    postDomain.GetUserId(),
+		Published: postDomain.GetPublished(),
+		Updated:   postDomain.GetUpdated(),
 	}
 }

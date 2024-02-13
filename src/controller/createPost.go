@@ -24,9 +24,13 @@ func (pc *postControllerInterface) CreatePost(c *gin.Context) {
 		c.JSON(restErr.Code, restErr)
 	}
 
+	//FAZER UM GETBYID E PASSAR NO USERID
+
 	domain := model.NewPostDomain(
 		postRequest.Title,
 		postRequest.Content,
+		postRequest.Published,
+		postRequest.Updated,
 		postRequest.UserId,
 	)
 

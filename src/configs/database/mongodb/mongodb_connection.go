@@ -27,6 +27,6 @@ func NewMongoDBConnection(ctx context.Context) (*mongo.Database, error) {
 		return nil, err
 	}
 
-	logger.Info("Conectado ao banco de dados com sucesso")
+	logger.Info("Conexão com o banco de dados realizada com sucesso.")
 	return client.Database(dbName), nil
 }

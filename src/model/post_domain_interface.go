@@ -12,17 +12,19 @@ type PostDomainInterface interface {
 	GetContent() string
 	GetUserId() int
 	SetId(string)
+	GetPublished() string
+	GetUpdated() string
 }
 
 func NewPostDomain(
-	title, content string, userId int,
+	title, content, published, updated string, userId int,
 ) PostDomainInterface {
 	return &postDomain{
 		Title:     title,
 		Content:   content,
+		Published: time.DateTime,
+		Updated:   time.DateTime,
 		UserId:    userId,
-		Published: time.Now().UTC(),
-		Updated:   time.Now().UTC(),
 	}
 }
 
