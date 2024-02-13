@@ -16,6 +16,7 @@ type postDomainService struct {
 
 type PostDomainService interface {
 	CreatePost(model.PostDomainInterface) (model.PostDomainInterface, *rest_err.RestErr)
+	GetPosts() ([]model.PostDomainInterface, *rest_err.RestErr)
 	// UpdateUser(string) *rest_err.RestErr
 	// FindUser(string) (*UserDomain, *rest_err.RestErr)
 	// DeleteUser(string) *rest_err.RestErr

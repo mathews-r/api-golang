@@ -12,6 +12,7 @@ type postRepository struct {
 
 type PostRepository interface {
 	CreatePost(postDomain model.PostDomainInterface) (model.PostDomainInterface, *rest_err.RestErr)
+	GetPosts() ([]model.PostDomainInterface, *rest_err.RestErr)
 }
 
 func NewPostRepository(database *mongo.Database) PostRepository {

@@ -16,7 +16,7 @@ func InitRoutes(r *gin.RouterGroup, userController controller.UserControllerInte
 
 	// POST ROUTES
 	// r.GET("/posts/search", tokenValidation, postController.GetPostByQuery)
-	// r.GET("/posts/", tokenValidation, post.GetPosts)
+	r.GET("/posts/", postController.GetPosts)
 	// r.GET("/posts/:postId", tokenValidation, postController)
 	r.POST("/posts/", postController.CreatePost)
 	// r.PUT("/posts/:postId", tokenValidation, postController.UpdatePost)
