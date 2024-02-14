@@ -7,3 +7,8 @@ type PostRequest struct {
 	Published string `json:"published"`
 	Updated   string `json:"updated"`
 }
+
+type PostUpdateRequest struct {
+	Title   string `json:"title" binding:"omitempty,min=4,max=50"`
+	Content string `json:"content" binding:"omitempty,min=1"`
+}

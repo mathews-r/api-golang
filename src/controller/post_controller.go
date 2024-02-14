@@ -13,8 +13,8 @@ type PostControllerInterface interface {
 	CreatePost(c *gin.Context)
 	GetPosts(c *gin.Context)
 	GetPostById(c *gin.Context)
+	UpdatePost(c *gin.Context)
 	// DeletePost(c *gin.Context)
-	// UpdatePost(c *gin.Context)
 }
 
 type postControllerInterface struct {

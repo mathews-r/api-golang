@@ -38,3 +38,12 @@ func (pd *postDomain) GetJSONValue() (string, error) {
 	}
 	return string(jsonValues), nil
 }
+
+func UpdatePostDomain(
+	title, content string,
+) PostDomainInterface {
+	return &postDomain{
+		Title:   title,
+		Content: content,
+	}
+}

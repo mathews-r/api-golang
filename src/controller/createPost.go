@@ -24,7 +24,6 @@ func (pc *postControllerInterface) CreatePost(c *gin.Context) {
 		c.JSON(restErr.Code, restErr)
 	}
 
-	//FAZER UM GETBYID E PASSAR NO USERID
 	token := c.Request.Header.Get("Authorization")
 
 	user, err := model.VerifyToken(token)

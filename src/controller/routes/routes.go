@@ -18,7 +18,7 @@ func InitRoutes(r *gin.RouterGroup, userController controller.UserControllerInte
 	r.POST("/posts/", model.VerifyTokenMiddleware, postController.CreatePost)
 	r.GET("/posts/", model.VerifyTokenMiddleware, postController.GetPosts)
 	r.GET("/posts/:postId", model.VerifyTokenMiddleware, postController.GetPostById)
-	// r.PUT("/posts/:postId", model.VerifyTokenMiddleware, postController.UpdatePost)
+	r.PUT("/posts/:postId", model.VerifyTokenMiddleware, postController.UpdatePost)
 	// r.DELETE("/posts/:postId", model.VerifyTokenMiddleware, postController.DeletePost)
 	// r.GET("/posts/search", model.VerifyTokenMiddleware, postController.GetPostByQuery)
 
