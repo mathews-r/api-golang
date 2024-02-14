@@ -11,10 +11,14 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+var (
+	DB_POST_COLLECTION = "DB_POST_COLLECTION"
+)
+
 func (ur *postRepository) CreatePost(postDomain model.PostDomainInterface) (model.PostDomainInterface, *rest_err.RestErr) {
 	logger.Info("Init createUser repository")
 
-	collectionName := os.Getenv(DB_USER_COLLECTION)
+	collectionName := os.Getenv(DB_POST_COLLECTION)
 
 	collection := ur.databaseConnection.Collection(collectionName)
 

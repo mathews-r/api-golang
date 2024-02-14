@@ -15,7 +15,7 @@ import (
 func (pr *postRepository) GetPosts() ([]model.PostDomainInterface, *rest_err.RestErr) {
 	logger.Info("Init GetPosts repository")
 
-	collectionName := os.Getenv(DB_USER_COLLECTION)
+	collectionName := os.Getenv(DB_POST_COLLECTION)
 
 	collection := pr.databaseConnection.Collection(collectionName)
 
