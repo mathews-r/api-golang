@@ -9,7 +9,7 @@ Neste projeto desenvolvi uma API e um banco de dados para a produção de conte�
 
 ✅ Arquiterura MVC - Model, View e Controller;
 
-X Testes - Em desenvolvimento
+:warning: Testes - Em desenvolvimento
 
 ## :hammer_and_wrench: Ferramentas 
 ### 🍮 BackEnd
