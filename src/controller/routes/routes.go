@@ -25,7 +25,4 @@ func InitRoutes(r *gin.RouterGroup, userController controller.UserControllerInte
 	// CATEGORY ROUTES
 	// r.GET("/categories/", tokenValidation, categoryController.GetCategories)
 	// r.POST("/categories/", tokenValidation, categoryController.NewCategory)
-
-	// AUTHY ROUTES
-	// R.POST("/auth", authController.Verify)
 }

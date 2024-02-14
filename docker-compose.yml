@@ -5,9 +5,12 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      - MONGODB_URL=mongodb://mongodb:27017
-      - MONGODB_USER_DB=users
-      - JWT_SECRET_KEY=<um_valor_randomico>
+      - DB_URL=mongodb://localhost:27017
+      - DB_NAME=mongodb
+      - DB_USER_COLLECTION=users
+      - DB_POST_COLLECTION=posts
+      - DB_CATEGORY_COLLECTION=categories
+      - JWT_SECRET_KEY=jwt_secret
     ports:
       - "8080:8080"
     depends_on:

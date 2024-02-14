@@ -1,2 +1,3 @@
-# api-golang
-CRUD utilizando linguagem GO
+# BLOGS API EM GOLANG
+
+EM CONSTRUÇÂO

@@ -25,4 +25,4 @@ EXPOSE 8080
 
 USER huncoding
 
-CMD ["./meuprimeirocrudgo"]
+CMD ["./api-golang"]
