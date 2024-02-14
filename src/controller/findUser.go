@@ -52,6 +52,7 @@ func (uc *userControllerInterface) FindUserByEmail(c *gin.Context) {
 		c.JSON(errorMessage.Code, errorMessage)
 		return
 	}
+
 	userDomain, err := uc.service.FindUserByEmail(email)
 	if err != nil {
 		c.JSON(err.Code, err)

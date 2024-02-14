@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"fmt"
 	"os"
 
 	"github.com/mathews-r/golang/src/configs/logger"
@@ -10,6 +11,9 @@ import (
 	"github.com/mathews-r/golang/src/model/repository/entity"
 	"github.com/mathews-r/golang/src/model/repository/entity/converter"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.uber.org/zap"
 )
 
 func (pr *postRepository) GetPosts() ([]model.PostDomainInterface, *rest_err.RestErr) {
@@ -47,4 +51,32 @@ func (pr *postRepository) GetPosts() ([]model.PostDomainInterface, *rest_err.Res
 
 	logger.Info("Executed successfully")
 	return posts, nil
+}
+
+func (pr *postRepository) GetPostById(postId string) (model.PostDomainInterface, *rest_err.RestErr) {
+	logger.Info("Init GetPostById repository")
+
+	collectionName := os.Getenv(DB_POST_COLLECTION)
+
+	collection := pr.databaseConnection.Collection(collectionName)
+
+	postEntity := &entity.PostEntity{}
+
+	objectId, _ := primitive.ObjectIDFromHex(postId)
+	filter := bson.D{{Key: "_id", Value: objectId}}
+	err := collection.FindOne(context.Background(), filter).Decode(postEntity)
+
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			errorMessage := fmt.Sprintf("post not found in database: %s", postId)
+			logger.Error(errorMessage, err)
+			return nil, rest_err.NewNotFoundErr(errorMessage)
+		}
+		errorMessage := "Error trying to find a post by id"
+		logger.Error(errorMessage, err)
+		return nil, rest_err.NewInternalServerErr(errorMessage)
+	}
+
+	logger.Info("Executed successfully", zap.String("post", postId))
+	return converter.ConvertEntityToDomainPost(*postEntity), nil
 }

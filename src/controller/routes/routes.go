@@ -15,12 +15,12 @@ func InitRoutes(r *gin.RouterGroup, userController controller.UserControllerInte
 	r.DELETE("/deleteUser/:userId", userController.DeleteUser)
 
 	// POST ROUTES
-	// r.GET("/posts/search", tokenValidation, postController.GetPostByQuery)
-	r.GET("/posts/", postController.GetPosts)
-	// r.GET("/posts/:postId", tokenValidation, postController)
-	r.POST("/posts/", postController.CreatePost)
-	// r.PUT("/posts/:postId", tokenValidation, postController.UpdatePost)
-	// r.DELETE("/posts/:postId", tokenValidation, postController.DeletePost)
+	r.POST("/posts/", model.VerifyTokenMiddleware, postController.CreatePost)
+	r.GET("/posts/", model.VerifyTokenMiddleware, postController.GetPosts)
+	r.GET("/posts/:postId", model.VerifyTokenMiddleware, postController.GetPostById)
+	// r.PUT("/posts/:postId", model.VerifyTokenMiddleware, postController.UpdatePost)
+	// r.DELETE("/posts/:postId", model.VerifyTokenMiddleware, postController.DeletePost)
+	// r.GET("/posts/search", model.VerifyTokenMiddleware, postController.GetPostByQuery)
 
 	// CATEGORY ROUTES
 	// r.GET("/categories/", tokenValidation, categoryController.GetCategories)
