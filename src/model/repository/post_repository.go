@@ -15,6 +15,7 @@ type PostRepository interface {
 	GetPosts() ([]model.PostDomainInterface, *rest_err.RestErr)
 	GetPostById(string) (model.PostDomainInterface, *rest_err.RestErr)
 	UpdatePost(string, model.PostDomainInterface) *rest_err.RestErr
+	DeletePost(string) *rest_err.RestErr
 }
 
 func NewPostRepository(database *mongo.Database) PostRepository {

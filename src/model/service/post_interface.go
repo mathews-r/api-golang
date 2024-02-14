@@ -19,4 +19,5 @@ type PostDomainService interface {
 	GetPosts() ([]model.PostDomainInterface, *rest_err.RestErr)
 	GetPostById(postId string) (model.PostDomainInterface, *rest_err.RestErr)
 	UpdatePost(string, model.PostDomainInterface) *rest_err.RestErr
+	DeletePost(string) *rest_err.RestErr
 }

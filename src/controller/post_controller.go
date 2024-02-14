@@ -14,7 +14,7 @@ type PostControllerInterface interface {
 	GetPosts(c *gin.Context)
 	GetPostById(c *gin.Context)
 	UpdatePost(c *gin.Context)
-	// DeletePost(c *gin.Context)
+	DeletePost(c *gin.Context)
 }
 
 type postControllerInterface struct {
