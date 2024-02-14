@@ -32,3 +32,13 @@ func ConvertEntityToDomainPost(entity entity.PostEntity) model.PostDomainInterfa
 
 	return domain
 }
+
+func ConvertEntityToDomainCategory(entity entity.CategoryEntity) model.CategoryDomainInterface {
+	domain := model.CategoryDomain(
+		entity.Category,
+	)
+
+	domain.SetId(entity.ID.Hex())
+
+	return domain
+}

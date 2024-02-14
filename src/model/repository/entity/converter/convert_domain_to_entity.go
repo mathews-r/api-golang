@@ -24,3 +24,9 @@ func ConvertDomainToEntityPost(domain model.PostDomainInterface) *entity.PostEnt
 		Updated:   domain.GetUpdated(),
 	}
 }
+
+func ConvertDomainToEntityCategory(domain model.CategoryDomainInterface) *entity.CategoryEntity {
+	return &entity.CategoryEntity{
+		Category: domain.GetCategory(),
+	}
+}

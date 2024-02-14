@@ -34,10 +34,14 @@ func main() {
 	postService := service.NewPostDomainService(postRepo)
 	postController := controller.NewPostControllerInterface(postService)
 
+	categoryRepo := repository.NewCategoryRepository(database)
+	categoryService := service.NewCategoryDomainService(categoryRepo)
+	categoryController := controller.NewCategoryControllerInterface(categoryService)
+
 	// userController := initDependencies(database)
 	router := gin.Default()
 
-	routes.InitRoutes(&router.RouterGroup, userController, postController)
+	routes.InitRoutes(&router.RouterGroup, userController, postController, categoryController)
 	if err := router.Run(":8080"); err != nil {
 		log.Fatal(err)
 	}

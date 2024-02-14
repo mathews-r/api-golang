@@ -17,6 +17,17 @@ type PostDomainInterface interface {
 	GetCategory() string
 }
 
+func (pd *postDomain) GetJSONValue() (string, error) {
+
+	jsonValues, err := json.Marshal(pd)
+
+	if err != nil {
+		fmt.Println(err)
+		return "", err
+	}
+	return string(jsonValues), nil
+}
+
 func NewPostDomain(
 	title, content, category, userId, published, updated string,
 ) PostDomainInterface {
@@ -28,17 +39,6 @@ func NewPostDomain(
 		Published: time.DateTime,
 		Updated:   time.DateTime,
 	}
-}
-
-func (pd *postDomain) GetJSONValue() (string, error) {
-
-	jsonValues, err := json.Marshal(pd)
-
-	if err != nil {
-		fmt.Println(err)
-		return "", err
-	}
-	return string(jsonValues), nil
 }
 
 func UpdatePostDomain(

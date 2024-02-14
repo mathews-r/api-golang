@@ -6,7 +6,7 @@ import (
 	"github.com/mathews-r/golang/src/model"
 )
 
-func InitRoutes(r *gin.RouterGroup, userController controller.UserControllerInterface, postController controller.PostControllerInterface) {
+func InitRoutes(r *gin.RouterGroup, userController controller.UserControllerInterface, postController controller.PostControllerInterface, categoryController controller.CategoryControllerInterface) {
 
 	r.GET("/getUserByEmail/:userEmail", model.VerifyTokenMiddleware, userController.FindUserByEmail)
 	r.POST("/createUser", userController.CreateUser)
@@ -23,6 +23,6 @@ func InitRoutes(r *gin.RouterGroup, userController controller.UserControllerInte
 	// r.GET("/posts/search", model.VerifyTokenMiddleware, postController.GetPostByQuery)
 
 	// CATEGORY ROUTES
-	// r.GET("/categories/", tokenValidation, categoryController.GetCategories)
-	// r.POST("/categories/", tokenValidation, categoryController.NewCategory)
+	r.POST("/categories/", model.VerifyTokenMiddleware, categoryController.CreateCategory)
+	// r.GET("/categories/", model.VerifyTokenMiddleware, categoryController.GetCategories)
 }

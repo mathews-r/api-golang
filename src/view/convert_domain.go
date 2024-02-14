@@ -29,3 +29,12 @@ func ConvertDomainToResponsePost(
 		Updated:   postDomain.GetUpdated(),
 	}
 }
+
+func ConvertDomainToResponseCategory(
+	categoryDomain model.CategoryDomainInterface,
+) response.CategoryResponse {
+	return response.CategoryResponse{
+		ID:       categoryDomain.GetId(),
+		Category: categoryDomain.GetCategory(),
+	}
+}
