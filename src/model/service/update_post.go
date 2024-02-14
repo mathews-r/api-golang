@@ -8,12 +8,23 @@ import (
 )
 
 func (pd *postDomainService) UpdatePost(postId string, postDomain model.PostDomainInterface) *rest_err.RestErr {
-	logger.Info("Init updatePost model", zap.String("journey", "updatePost"))
+	logger.Info("Init UpdatePost model.",
+		zap.String("journey", "UpdatePost"))
 
 	err := pd.postRepository.UpdatePost(postId, postDomain)
 
 	if err != nil {
+		logger.Error("Error trying to call repository",
+			err,
+			zap.String("journey", "UpdatePost"))
+
 		return err
 	}
+
+	logger.Info(
+		"UpdatePost service executed successfully",
+		zap.String("postId", postId),
+		zap.String("journey", "UpdatePost"))
+
 	return nil
 }

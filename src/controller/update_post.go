@@ -10,12 +10,19 @@ import (
 	"github.com/mathews-r/golang/src/controller/model/request"
 	"github.com/mathews-r/golang/src/model"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.uber.org/zap"
 )
 
 func (pc *postControllerInterface) UpdatePost(c *gin.Context) {
+	logger.Info("Init UpdatePost controller",
+		zap.String("journey", "UpdatePost"))
+
 	var postRequest request.PostUpdateRequest
 
 	if err := c.ShouldBindJSON(&postRequest); err != nil {
+		logger.Error("Error trying to validate user info", err,
+			zap.String("journey", "UpdatePost"))
+
 		restErr := validation.ValidateUserError(err)
 		c.JSON(restErr.Code, restErr)
 		return
@@ -35,10 +42,19 @@ func (pc *postControllerInterface) UpdatePost(c *gin.Context) {
 
 	err := pc.service.UpdatePost(postId, domain)
 	if err != nil {
+		logger.Error(
+			"Error trying to call UpdatePost service",
+			err,
+			zap.String("journey", "UpdatePost"))
+
 		c.JSON(err.Code, err)
 		return
 	}
 
-	logger.Info("Post updated successfully")
+	logger.Info(
+		"UpdatePost controller executed successfully",
+		zap.String("postId", postId),
+		zap.String("journey", "UpdatePost"))
+
 	c.Status(http.StatusOK)
 }

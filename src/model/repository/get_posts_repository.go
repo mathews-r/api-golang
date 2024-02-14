@@ -54,7 +54,8 @@ func (pr *postRepository) GetPosts() ([]model.PostDomainInterface, *rest_err.Res
 }
 
 func (pr *postRepository) GetPostById(postId string) (model.PostDomainInterface, *rest_err.RestErr) {
-	logger.Info("Init GetPostById repository")
+	logger.Info("Init GetPostById repository",
+		zap.String("journey", "GetPostById"))
 
 	collectionName := os.Getenv(DB_POST_COLLECTION)
 
@@ -77,6 +78,9 @@ func (pr *postRepository) GetPostById(postId string) (model.PostDomainInterface,
 		return nil, rest_err.NewInternalServerErr(errorMessage)
 	}
 
-	logger.Info("Executed successfully", zap.String("post", postId))
+	logger.Info("GetPostById repository executed successfully",
+		zap.String("journey", "GetPostById"),
+		zap.String("postId", postId))
+
 	return converter.ConvertEntityToDomainPost(*postEntity), nil
 }

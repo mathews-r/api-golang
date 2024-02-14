@@ -14,9 +14,15 @@ import (
 )
 
 func (uc *userControllerInterface) UpdateUser(c *gin.Context) {
+	logger.Info("Init updateUser controller",
+		zap.String("journey", "updateUser"))
+
 	var userRequest request.UserUpdateRequest
 
 	if err := c.ShouldBindJSON(&userRequest); err != nil {
+		logger.Error("Error trying to validate user info", err,
+			zap.String("journey", "updateUser"))
+
 		restErr := validation.ValidateUserError(err)
 		c.JSON(restErr.Code, restErr)
 		return
@@ -35,10 +41,19 @@ func (uc *userControllerInterface) UpdateUser(c *gin.Context) {
 
 	err := uc.service.UpdateUser(userId, domain)
 	if err != nil {
+		logger.Error(
+			"Error trying to call updateUser service",
+			err,
+			zap.String("journey", "updateUser"))
+
 		c.JSON(err.Code, err)
 		return
 	}
 
-	logger.Info("User created successfully", zap.String("journey", "createUser"))
+	logger.Info(
+		"updateUser controller executed successfully",
+		zap.String("userId", userId),
+		zap.String("journey", "updateUser"))
+
 	c.Status(http.StatusOK)
 }

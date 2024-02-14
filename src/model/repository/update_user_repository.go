@@ -10,10 +10,12 @@ import (
 	"github.com/mathews-r/golang/src/model/repository/entity/converter"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.uber.org/zap"
 )
 
 func (ur *userRepository) UpdateUser(userId string, userDomain model.UserDomainInterface) *rest_err.RestErr {
-	logger.Info("Init updateUser repository")
+	logger.Info("Init updateUser repository",
+		zap.String("journey", "updateUser"))
 
 	collectionName := os.Getenv(DB_USER_COLLECTION)
 
@@ -27,8 +29,17 @@ func (ur *userRepository) UpdateUser(userId string, userDomain model.UserDomainI
 
 	_, err := collection.UpdateOne(context.Background(), filter, update)
 	if err != nil {
+		logger.Error("Error trying to update user",
+			err,
+			zap.String("journey", "updateUser"))
+
 		return rest_err.NewInternalServerErr(err.Error())
 	}
+
+	logger.Info(
+		"updateUser repository executed successfully",
+		zap.String("userId", userId),
+		zap.String("journey", "updateUser"))
 
 	return nil
 }

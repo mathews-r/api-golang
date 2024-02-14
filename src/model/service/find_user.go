@@ -8,11 +8,15 @@ import (
 )
 
 func (ud *userDomainService) FindUserByEmail(email string) (model.UserDomainInterface, *rest_err.RestErr) {
-	logger.Info("Init findUserByEmail", zap.String("journey", "findUserByEmail"))
+	logger.Info("Init findUserByID services.",
+		zap.String("journey", "findUserById"))
+
 	return ud.userRepository.FindUserByEmail(email)
 }
 
 func (ud *userDomainService) findUserByEmailAndPassword(email string, password string) (model.UserDomainInterface, *rest_err.RestErr) {
-	logger.Info("Init findUserByEmailAndPassword", zap.String("journey", "findUserByEmailAndPassword"))
+	logger.Info("Init findUserByEmail services.",
+		zap.String("journey", "findUserById"))
+
 	return ud.userRepository.FindUserByEmailAndPassword(email, password)
 }

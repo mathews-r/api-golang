@@ -17,9 +17,17 @@ var (
 )
 
 func (pc *postControllerInterface) CreatePost(c *gin.Context) {
+	logger.Info("Init CreatePost controller",
+		zap.String("journey", "CreatePost"),
+	)
+
 	var postRequest request.PostRequest
 
 	if err := c.ShouldBindJSON(&postRequest); err != nil {
+		logger.Info("Error trying to validate post info",
+			zap.String("journey", "CreatePost"),
+		)
+
 		restErr := validation.ValidateUserError(err)
 		c.JSON(restErr.Code, restErr)
 	}
@@ -28,6 +36,10 @@ func (pc *postControllerInterface) CreatePost(c *gin.Context) {
 
 	user, err := model.VerifyToken(token)
 	if err != nil {
+		logger.Info("Error trying to call CreatePost service",
+			zap.String("journey", "CreatePost"),
+		)
+
 		c.JSON(err.Code, err)
 		return
 	}
@@ -47,6 +59,9 @@ func (pc *postControllerInterface) CreatePost(c *gin.Context) {
 		return
 	}
 
-	logger.Info("Post created successfully", zap.String("journey", "createPost"))
+	logger.Info(
+		"CreatePost controller executed successfully",
+		zap.String("postId", domainResult.GetPostId()),
+		zap.String("journey", "CreatePost"))
 	c.JSON(http.StatusOK, view.ConvertDomainToResponsePost(domainResult))
 }

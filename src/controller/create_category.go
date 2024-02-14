@@ -17,9 +17,15 @@ var (
 )
 
 func (cc *categoryControllerInterface) CreateCategory(c *gin.Context) {
+	logger.Info("Init CreateCategory controller",
+		zap.String("journey", "CreateCategory"),
+	)
 	var categoryRequest request.CategoryRequest
 
 	if err := c.ShouldBindJSON(&categoryRequest); err != nil {
+		logger.Error("Error trying to validate category info", err,
+			zap.String("journey", "CreateCategory"))
+
 		restErr := validation.ValidateUserError(err)
 		c.JSON(restErr.Code, restErr)
 	}
@@ -30,10 +36,19 @@ func (cc *categoryControllerInterface) CreateCategory(c *gin.Context) {
 
 	domainResult, err := cc.service.CreateCategory(domain)
 	if err != nil {
+		logger.Error(
+			"Error trying to call CreateCategory service",
+			err,
+			zap.String("journey", "CreateCategory"))
+
 		c.JSON(err.Code, err)
 		return
 	}
 
-	logger.Info("category created successfully", zap.String("journey", "categoryCreate"))
+	logger.Info(
+		"CreateCategory controller executed successfully",
+		zap.String("categoryId", domainResult.GetId()),
+		zap.String("journey", "CreateCategory"))
+
 	c.JSON(http.StatusOK, view.ConvertDomainToResponseCategory(domainResult))
 }

@@ -13,13 +13,21 @@ import (
 )
 
 func (uc *userControllerInterface) LoginUser(c *gin.Context) {
+	logger.Info("Init loginUser controller",
+		zap.String("journey", "loginUser"),
+	)
+
 	var userLogin request.UserLogin
 
 	if err := c.ShouldBindJSON(&userLogin); err != nil {
+		logger.Error("Error trying to validate user info", err,
+			zap.String("journey", "loginUser"))
+
 		restErr := validation.ValidateUserError(err)
 		c.JSON(restErr.Code, restErr)
 		return
 	}
+
 	domain := model.LoginDomain(
 		userLogin.Email,
 		userLogin.Password,
@@ -27,11 +35,21 @@ func (uc *userControllerInterface) LoginUser(c *gin.Context) {
 
 	domainResult, token, err := uc.service.LoginUser(domain)
 	if err != nil {
+		logger.Error(
+			"Error trying to call loginUser service",
+			err,
+			zap.String("journey", "loginUser"))
+
 		c.JSON(err.Code, err)
 		return
 	}
 
+	logger.Info(
+		"loginUser controller executed successfully",
+		zap.String("userId", domainResult.GetId()),
+		zap.String("journey", "loginUser"))
+
 	c.Header("Authorization", token)
-	logger.Info("Login successfully", zap.String("journey", "LoginUser"))
+
 	c.JSON(http.StatusOK, view.ConvertDomainToResponse(domainResult))
 }

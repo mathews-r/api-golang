@@ -14,7 +14,8 @@ import (
 )
 
 func (pr *postRepository) UpdatePost(postId string, postDomain model.PostDomainInterface) *rest_err.RestErr {
-	logger.Info("Init updateUser repository")
+	logger.Info("Init UpdatePost repository",
+		zap.String("journey", "UpdatePost"))
 
 	collectionName := os.Getenv(DB_POST_COLLECTION)
 
@@ -28,9 +29,15 @@ func (pr *postRepository) UpdatePost(postId string, postDomain model.PostDomainI
 
 	_, err := collection.UpdateOne(context.Background(), filter, update)
 	if err != nil {
+		logger.Error("Error trying to update post",
+			err,
+			zap.String("journey", "UpdatePost"))
 		return rest_err.NewInternalServerErr(err.Error())
 	}
 
-	logger.Info("Post updated successfully", zap.String("postId", postId))
+	logger.Info(
+		"UpdatePost repository executed successfully",
+		zap.String("postId", postIdHex.Hex()),
+		zap.String("journey", "UpdatePost"))
 	return nil
 }

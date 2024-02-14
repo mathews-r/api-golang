@@ -10,7 +10,8 @@ import (
 func (ud *userDomainService) CreateUser(
 	userDomain model.UserDomainInterface,
 ) (model.UserDomainInterface, *rest_err.RestErr) {
-	logger.Info("Init createUser model", zap.String("journey", "createUser"))
+	logger.Info("Init createUser model.",
+		zap.String("journey", "createUser"))
 
 	user, _ := ud.FindUserByEmail(userDomain.GetEmail())
 	if user != nil {
@@ -21,7 +22,15 @@ func (ud *userDomainService) CreateUser(
 	userDomainRepository, err := ud.userRepository.CreateUser(userDomain)
 
 	if err != nil {
+		logger.Error("Error trying to call repository",
+			err,
+			zap.String("journey", "createUser"))
 		return nil, err
 	}
+
+	logger.Info(
+		"CreateUser service executed successfully",
+		zap.String("userId", userDomainRepository.GetId()),
+		zap.String("journey", "createUser"))
 	return userDomainRepository, nil
 }
