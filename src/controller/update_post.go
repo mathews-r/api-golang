@@ -30,6 +30,7 @@ func (pc *postControllerInterface) UpdatePost(c *gin.Context) {
 	domain := model.UpdatePostDomain(
 		postRequest.Title,
 		postRequest.Content,
+		postRequest.Category,
 	)
 
 	err := pc.service.UpdatePost(postId, domain)

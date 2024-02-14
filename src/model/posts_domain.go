@@ -4,6 +4,7 @@ type postDomain struct {
 	ID        string
 	Title     string
 	Content   string
+	Category  string
 	UserId    string
 	Published string
 	Updated   string
@@ -35,4 +36,8 @@ func (pd *postDomain) GetPublished() string {
 
 func (pd *postDomain) GetUpdated() string {
 	return pd.Updated
+}
+
+func (pd *postDomain) GetCategory() string {
+	return pd.Category
 }

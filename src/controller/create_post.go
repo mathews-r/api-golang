@@ -35,9 +35,10 @@ func (pc *postControllerInterface) CreatePost(c *gin.Context) {
 	domain := model.NewPostDomain(
 		postRequest.Title,
 		postRequest.Content,
+		postRequest.Category,
+		user.GetId(),
 		postRequest.Published,
 		postRequest.Updated,
-		user.GetId(),
 	)
 
 	domainResult, err := pc.service.CreatePost(domain)

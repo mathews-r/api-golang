@@ -23,6 +23,7 @@ func ConvertDomainToResponsePost(
 		ID:        postDomain.GetPostId(),
 		Title:     postDomain.GetTitle(),
 		Content:   postDomain.GetContent(),
+		Category:  postDomain.GetCategory(),
 		UserId:    postDomain.GetUserId(),
 		Published: postDomain.GetPublished(),
 		Updated:   postDomain.GetUpdated(),

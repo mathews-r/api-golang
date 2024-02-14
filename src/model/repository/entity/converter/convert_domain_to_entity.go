@@ -18,6 +18,7 @@ func ConvertDomainToEntityPost(domain model.PostDomainInterface) *entity.PostEnt
 	return &entity.PostEntity{
 		Title:     domain.GetTitle(),
 		Content:   domain.GetContent(),
+		Category:  domain.GetCategory(),
 		UserId:    domain.GetUserId(),
 		Published: domain.GetPublished(),
 		Updated:   domain.GetUpdated(),

@@ -14,17 +14,19 @@ type PostDomainInterface interface {
 	SetId(string)
 	GetPublished() string
 	GetUpdated() string
+	GetCategory() string
 }
 
 func NewPostDomain(
-	title, content, published, updated, userId string,
+	title, content, category, userId, published, updated string,
 ) PostDomainInterface {
 	return &postDomain{
 		Title:     title,
 		Content:   content,
+		Category:  category,
+		UserId:    userId,
 		Published: time.DateTime,
 		Updated:   time.DateTime,
-		UserId:    userId,
 	}
 }
 
@@ -40,10 +42,11 @@ func (pd *postDomain) GetJSONValue() (string, error) {
 }
 
 func UpdatePostDomain(
-	title, content string,
+	title, category, content string,
 ) PostDomainInterface {
 	return &postDomain{
-		Title:   title,
-		Content: content,
+		Title:    title,
+		Content:  content,
+		Category: category,
 	}
 }
