@@ -11,7 +11,7 @@ Neste projeto desenvolvi uma API e um banco de dados para a produção de conte�
 
 :warning: Testes - Em desenvolvimento
 
-## :hammer_and_wrench: Ferramentas 
+## :hammer_and_wrench: Ferramentas
 ### 🍮 BackEnd
 - GoLang;
 - Gin Gonic;
@@ -39,7 +39,7 @@ $ cd apiblog-golang
 - *Executar projeto:*
 
 ```
-$ docker-compose run
+$ docker-compose -d
 ```
 
 ## 👨‍💻 Desenvolvedor
